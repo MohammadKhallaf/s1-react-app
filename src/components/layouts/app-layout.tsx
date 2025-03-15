@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, Outlet } from "react-router";
 import "./App.css";
+import { Suspense } from "react";
 
 function AppLayout() {
 	return (
@@ -20,12 +21,18 @@ function AppLayout() {
 						<Nav.Link as={Link} to="/categories">
 							Categories
 						</Nav.Link>
+						<Nav.Link as={Link} to="/heavy">
+							Heavy Component
+						</Nav.Link>
 					</Nav>
 				</Container>
 			</Navbar>
 
 			<Container>
+        <Suspense fallback={"Loading ... "}>
+
 				<Outlet />
+        </Suspense>
 			</Container>
 		</>
 	);
