@@ -23,7 +23,10 @@ function AppLayout() {
 					</Nav>
 				</Container>
 			</Navbar>
-			<Outlet />
+
+			<Container>
+				<Outlet />
+			</Container>
 		</>
 	);
 }
