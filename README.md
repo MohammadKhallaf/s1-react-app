@@ -39,3 +39,8 @@
    ```
   - 'before mount`
   ```useLayoutEffect(,)```
+
+
+## React Router
+- 1st level routes should have `""` | `"/"` once
+- `{path,Component,children,index?}[]`

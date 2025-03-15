@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
-import Header from "../atoms/header";
-import Paragraph from "../atoms/paragraph";
+import Header from "@/atoms/header";
+import Paragraph from "@/atoms/paragraph";
 
 function HomeSection({
 	label,
