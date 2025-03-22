@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { Table, Container, Button } from "react-bootstrap";
+import { ProductsContext } from "@/context-store/products-context";
+import { useContext } from "react";
+import { Button, Container, Table } from "react-bootstrap";
 import { Link } from "react-router";
-import { productsList, type TProduct } from "@/utils/products";
 
 const ProductList: React.FC = () => {
-	const [products, setProducts] = useState<TProduct[]>(productsList);
+	const { products, loading } = useContext(ProductsContext);
 
 	return (
 		<Container className="mt-4">
@@ -21,7 +21,12 @@ const ProductList: React.FC = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{products.map(({ id, name, description, price, category }) => (
+					{loading && (
+						<tr>
+							<td colSpan={6}>Loading...</td>
+						</tr>
+					)}
+					{products?.map(({ id, name, description, price, category }) => (
 						<tr key={id}>
 							<td>{id}</td>
 							<td>{name}</td>

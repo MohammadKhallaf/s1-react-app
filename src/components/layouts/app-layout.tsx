@@ -4,10 +4,11 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link, Outlet } from "react-router";
 import "./App.css";
 import { Suspense } from "react";
+import ProductsProvider from "@/context-store/products-context";
 
 function AppLayout() {
 	return (
-		<>
+		<ProductsProvider>
 			<Navbar bg="dark" data-bs-theme="dark">
 				<Container>
 					<Navbar.Brand href="/">Navbar</Navbar.Brand>
@@ -29,12 +30,11 @@ function AppLayout() {
 			</Navbar>
 
 			<Container>
-        <Suspense fallback={"Loading ... "}>
-
-				<Outlet />
-        </Suspense>
+				<Suspense fallback={"Loading ... "}>
+					<Outlet />
+				</Suspense>
 			</Container>
-		</>
+		</ProductsProvider>
 	);
 }
 

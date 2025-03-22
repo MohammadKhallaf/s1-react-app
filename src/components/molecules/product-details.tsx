@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { faker } from "@faker-js/faker";
 import { Container, Card, Badge, Button, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router";
-import { productsList, type TProduct } from "@/utils/products";
+import { ProductsContext } from "@/context-store/products-context";
+
 // Reusing the Product type
 
 const ProductDetails: React.FC = () => {
-	const [product, setProduct] = useState<TProduct | null>(null);
 	const params = useParams();
-	// 1. read id
-	// 2. get product with that id
-	useEffect(() => {
-		const productId = params.id;
-		const foundProduct = productsList.find((item) => item.id === productId);
-		if (foundProduct) setProduct(foundProduct);
-	}, [params]);
+	const { products } = useContext(ProductsContext);
+
+	const productId = params.id;
+	const product = products.find((item) => item.id === productId);
 
 	if (!product) return <div>Product Not Found</div>;
 

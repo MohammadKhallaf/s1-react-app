@@ -44,3 +44,27 @@
 ## React Router
 - 1st level routes should have `""` | `"/"` once
 - `{path,Component,children,index?}[]`
+- lazy loading
+
+
+## Rules of Hooks
+1- only used inside another (component | hook)
+
+
+## 22 Mar
+### Declarative 
+### Migrate from variable ==> react ecosystem <==> global state
+### Context
+1- create context to collect data
+`const ProductsContext = createContext({});`
+
+2- prepare "state" for sharing (inside root app)
+`const [products, setProducts] = useState([]);`
+
+3- wrap root element within context
+
+4- inject state in the provider
+`<ProductsContext value={{ products }}>`
+
+4- consume shared | global state
+`const { products } = useContext(ProductsContext);`
