@@ -88,3 +88,9 @@
 - @ component 
   - useSelector() => reading state
   - useDispatch() => action execution
+
+## Async Thunk
+
+## SWR
+
+## Protected Component | Protected Route ( 2 ways )
