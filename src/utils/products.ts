@@ -7,6 +7,16 @@ export type TProduct = {
   description: string;
   price: string;
   category: string;
+  image?: string;
+};
+
+export type TProductAPI = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  image: string;
 };
 
 // Generate a single product

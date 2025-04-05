@@ -1,16 +1,35 @@
 import { useAppSelector } from "@/hooks";
+import type { TProduct } from "@/utils/products";
 import { faker } from "@faker-js/faker";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Badge, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router";
+import useSWR from "swr";
 
 // Reusing the Product type
 
 const ProductDetails: React.FC = () => {
 	const params = useParams();
-	const { list } = useAppSelector((state) => state.product);
 
 	const productId = params.id;
-	const product = list.find((item) => item.id === productId);
+	const { data, error, isLoading } = useSWR(`products/${productId}`, () =>
+		axios.get(`https://fakestoreapi.com/products/${productId}`),
+	);
+
+	const product = data?.data && {
+		id: data?.data.id,
+		name: data?.data.title,
+		description: data?.data.description,
+		price: data?.data.price,
+		category: data?.data.category,
+		image: data?.data.image,
+	};
+	// const product = list.find((item) => {
+	// 	return item.id.toString() === productId.toString();
+	// });
+	if (isLoading) return <div>Loading...</div>;
+	if (error) return <div>Error loading product</div>;
 
 	if (!product) return <div>Product Not Found</div>;
 
@@ -21,7 +40,10 @@ const ProductDetails: React.FC = () => {
 					<Card className="shadow-sm rounded-4">
 						<Card.Img
 							variant="top"
-							src={faker.image.urlPicsumPhotos({ width: 600, height: 400 })}
+							src={
+								product.image ??
+								faker.image.urlPicsumPhotos({ width: 600, height: 400 })
+							}
 							alt={product.name}
 							className="rounded-top-4"
 						/>
