@@ -1,17 +1,16 @@
-import { useContext } from "react";
+import { useAppSelector } from "@/hooks";
 import { faker } from "@faker-js/faker";
-import { Container, Card, Badge, Button, Row, Col } from "react-bootstrap";
+import { Badge, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router";
-import { ProductsContext } from "@/context-store/products-context";
 
 // Reusing the Product type
 
 const ProductDetails: React.FC = () => {
 	const params = useParams();
-	const { products } = useContext(ProductsContext);
+	const { list } = useAppSelector((state) => state.product);
 
 	const productId = params.id;
-	const product = products.find((item) => item.id === productId);
+	const product = list.find((item) => item.id === productId);
 
 	if (!product) return <div>Product Not Found</div>;
 

@@ -1,40 +1,38 @@
+import AppNavbar from "@/components/molecules/app-navbar";
+import { WishlistProvider } from "@/context-store/wishlist-context";
+import { useAppDispatch } from "@/hooks";
+import { setProducts } from "@/store/product-slice";
+import { productsList } from "@/utils/products";
+import { Suspense, useEffect } from "react";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { Link, Outlet } from "react-router";
+import { Outlet } from "react-router";
 import "./App.css";
-import { Suspense } from "react";
-import ProductsProvider from "@/context-store/products-context";
 
 function AppLayout() {
+	const dispatch = useAppDispatch();
+
+	// put some delay to simulate fetching data
+	useEffect(() => {
+		const t = setTimeout(() => {
+			dispatch(setProducts(productsList));
+		}, 5000);
+
+		return () => {
+			clearTimeout(t);
+		};
+	}, [dispatch]);
+
 	return (
-		<ProductsProvider>
-			<Navbar bg="dark" data-bs-theme="dark">
-				<Container>
-					<Navbar.Brand href="/">Navbar</Navbar.Brand>
-					<Nav className="me-auto">
-						<Link to="/" className="nav-link">
-							Home |react router|
-						</Link>
-						{/* <Nav.Link as={Link} to="/">Home | bootstrap & react router|</Nav.Link> */}
-						{/* <Nav.Link  href="/">Home | bootstrap |</Nav.Link> */}
-
-						<Nav.Link as={Link} to="/categories">
-							Categories
-						</Nav.Link>
-						<Nav.Link as={Link} to="/heavy">
-							Heavy Component
-						</Nav.Link>
-					</Nav>
-				</Container>
-			</Navbar>
-
+		<WishlistProvider>
+			{/* AuthProvider */}
+			{/* ThemeProvider */}
+			<AppNavbar />
 			<Container>
 				<Suspense fallback={"Loading ... "}>
 					<Outlet />
 				</Suspense>
 			</Container>
-		</ProductsProvider>
+		</WishlistProvider>
 	);
 }
 

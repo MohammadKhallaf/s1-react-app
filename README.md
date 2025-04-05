@@ -68,3 +68,23 @@
 
 4- consume shared | global state
 `const { products } = useContext(ProductsContext);`
+
+
+## Performance Optimization
+
+- Memoization ##repeat next session
+  - value   --> memo ==> useMemo ()=>{return value} , [ ]
+  - function -> callback ==> useCallback ()=>{} , [ ]
+- ()=>{} , [ ]
+- lazy loading
+
+## Redux Toolkit
+- <Provider > @ root component
+- folder -> redux store
+  - index.ts | store.ts
+  - for each slice of data -> one file
+    - export reducer from the file
+    - export actions if exist
+- @ component 
+  - useSelector() => reading state
+  - useDispatch() => action execution
